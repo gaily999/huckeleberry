@@ -380,7 +380,7 @@ header {
 /* ================= PAGE BANNER (INNER PAGES) ================= */
 .page-banner {
     padding: 180px 0 80px;
-    background: linear-gradient(rgba(20, 16, 19, 0.75), rgba(74, 31, 38, 0.85)), url("img/banner.png");
+    background: linear-gradient(rgba(255, 235, 212, 0.75), rgba(150, 87, 46, 0.85)), url("img/banner.png");
     background-size: cover;
     background-position: center;
     color: var(--white);
@@ -635,6 +635,108 @@ footer p {
     font-size: 15px; 
     font-weight: 500; 
     letter-spacing: .3px; 
+}
+
+/* ==========================================================
+                    INTERACTIVE MODAL SYSTEM
+========================================================== */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000; /* Placed above the sticky navbar */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20, 16, 19, 0.85); /* Dark background overlay */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Class added by JS to fade in */
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--white);
+    border-radius: 20px;
+    max-width: 700px;
+    width: 90%;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(20, 16, 19, 0.3);
+    transform: scale(0.85);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: column;
+    border-top: 6px solid var(--primary);
+}
+
+.modal.show .modal-content {
+    transform: scale(1);
+}
+
+#modal-img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+}
+
+.modal-text {
+    padding: 35px;
+    background: var(--cream);
+}
+
+#modal-title {
+    font-family: 'Cinzel', serif;
+    color: var(--accent);
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+#modal-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text);
+}
+
+.close-btn {
+    position: absolute;
+    top: 30px;
+    right: 45px;
+    font-size: 50px;
+    color: var(--cream);
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+}
+
+.close-btn:hover {
+    color: var(--secondary);
+    transform: scale(1.15);
+}
+
+
+@media (max-width: 768px) {
+    #modal-img {
+        height: 220px;
+    }
+    .modal-text {
+        padding: 20px;
+    }
+    #modal-title {
+        font-size: 20px;
+    }
+    .close-btn {
+        top: 20px;
+        right: 25px;
+        font-size: 40px;
+    }
 }
 
 /* ==========================================================

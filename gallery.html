@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery | Huckfinn Museum</title>
-     <link rel="icon" type="image/x-icon" href="#">
+    <link rel="icon" type="image/x-icon" href="#">
     <link rel="stylesheet" href="style.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@
 
         <div class="gallery-grid">
 
-            <div class="gallery-card">
+            <div class="gallery-card" data-details="During the 1830s and 1840s, the American South was heavily reliant on the plantation economy, which was built entirely on the systemized exploitation of enslaved Black people. By placing Huck and Jim's journey in this era, Mark Twain exposes the harsh, daily realities of this system. The novel contrasts the natural, peaceful morality of the river with the corrupt, legally enforced brutality of the towns along its banks.">
 
                 <img src="img/slavery.jpg" alt="Slavery in the 1830s to 1840s">
 
@@ -66,7 +66,7 @@
 
             </div>
 
-            <div class="gallery-card">
+            <div class="gallery-card" data-details="The Mississippi River serves as both the physical route of escape and a powerful symbol of freedom in the novel. Spanning over 2,300 miles, it was a bustling highway for steamboats, traders, and timber rafts. On the raft, Huck and Jim build an equal, peaceful society of two. However, the river's wild currents, thick fogs, and constant dangers keep them on guard, serving as a reminder that true freedom is hard-won.">
 
                 <img src="img/mississippi-river.jpg" alt="Mississippi River">
 
@@ -84,7 +84,7 @@
 
             </div>
 
-            <div class="gallery-card">
+            <div class="gallery-card" data-details="Historically, laws like the Fugitive Slave Act of 1850 and local slave codes heavily penalized anyone helping runaways. It was legally required for citizens to capture and return escaped enslaved people. Huck's deepest moral struggle occurs because society's laws and religious teachings tell him that helping Jim is a deadly sin. His decision to follow his heart and tear up his letter to Miss Watson represents a triumph of personal morality over unjust laws.">
 
                 <img src="img/laws.jpg" alt="Laws Affecting Enslaved People">
 
@@ -102,9 +102,9 @@
 
             </div>
 
-            <div class="gallery-card">
+            <div class="gallery-card" data-details="Born Samuel Langhorne Clemens, Mark Twain grew up in Hannibal, Missouri, right on the banks of the Mississippi River. He worked as a licensed riverboat pilot before the Civil War, a career that deeply shaped his understanding of human nature and dialects. His pen name, 'Mark Twain,' is a riverboat term meaning 'two fathoms deep,' signaling safe water for navigation. He drew directly from his childhood memories to create the world of Huck Finn.">
 
-                <img src="img/mark-twain.jpg" alt="Mark Twain">
+                <img src="img/mark.webp" alt="Mark Twain">
 
                 <div class="gallery-content">
 
@@ -120,7 +120,7 @@
 
             </div>
 
-            <div class="gallery-card">
+            <div class="gallery-card" data-details="Twain wrote 'The Adventures of Huckleberry Finn' after the abolition of slavery, during the Reconstruction and Jim Crow eras. By writing about the pre-war past, he was directly criticizing the post-war failures of American society to secure true equality and civil rights for Black Americans. The novel reflects the deep cultural transition, anxieties, and lingering prejudices of late 19th-century America.">
 
                 <img src="img/history.jpg" alt="Historical Events">
 
@@ -150,6 +150,71 @@
     <p>Educational Website Project</p>
 
 </footer>
+
+<div id="gallery-modal" class="modal">
+    <span class="close-btn">&times;</span>
+    <div class="modal-content">
+        <img id="modal-img" src="" alt="">
+        <div class="modal-text">
+            <h3 id="modal-title"></h3>
+            <p id="modal-desc"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const galleryCards = document.querySelectorAll('.gallery-card');
+        const modal = document.getElementById('gallery-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const closeBtn = document.querySelector('.close-btn');
+
+        galleryCards.forEach(card => {
+            const img = card.querySelector('img');
+            
+            
+            img.style.cursor = 'pointer'; 
+
+            img.addEventListener('click', () => {
+               
+                const titleText = card.querySelector('.gallery-content h3').innerText;
+                const detailedExplanation = card.getAttribute('data-details');
+                const imgUrl = img.getAttribute('src');
+                const imgAlt = img.getAttribute('alt');
+
+                // Inject content into the modal markup
+                modalImg.setAttribute('src', imgUrl);
+                modalImg.setAttribute('alt', imgAlt);
+                modalTitle.innerText = titleText;
+                modalDesc.innerText = detailedExplanation;
+
+              
+                modal.classList.add('show');
+            });
+        });
+
+       
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+
+      
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('show')) {
+                modal.classList.remove('show');
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
